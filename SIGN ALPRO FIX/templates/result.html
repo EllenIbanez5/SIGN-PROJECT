@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
+<head>
+        <title>SIGN - Result</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background: linear-gradient(to bottom, #e3f2fd, #f8f9fa);
+            }
+            .container {
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                width: 80%;
+                max-width: 600px;
+                text-align: center;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #007bff;
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+            p {
+                font-size: 1.2rem;
+                color: #333333;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                text-align: left;
+            }
+            ul li {
+                background: #edf2f7;
+                padding: 15px;
+                margin: 5px 0;
+                border-radius: 10px;
+                color: #333333;
+                font-size: 1rem;
+            }
+            a {
+                display: block;
+                margin-top: 20px;
+                color: #007bff;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                border-radius: 30px;
+                background: #ffffff;
+                border: 2px solid #007bff;
+                transition: background 0.3s ease, transform 0.2s;
+            }
+            a:hover {
+                background: #007bff;
+                color: #ffffff;
+                transform: scale(1.05);
+            }
+        </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p><strong>Disease:</strong> {{ disease }}</p>
+        <p><strong>Description:</strong> {{ description }}</p>
+        <p><strong>Precautions:</strong></p>
+        <ul>
+            {% for precaution in precautions %}
+                <li>{{ precaution }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('landing') }}">Back to Home</a>
+    </div>
+</body>
+</html>

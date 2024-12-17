@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.I.G.N - Check Symptoms</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #e3f2fd, #f8f9fa);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+  
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+  
+      .logo h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #007bff;
+        font-weight: bold;
+      }
+  
+      .logo span {
+        font-size: 0.9rem;
+        color: #6c757d;
+      }
+  
+      nav {
+        display: flex;
+        gap: 20px;
+      }
+  
+      nav a {
+        text-decoration: none;
+        color: #333333;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+  
+      nav a:hover {
+        color: #007bff;
+      }
+  
+      .predict-button {
+        background: #007bff;
+        color: #ffffff;
+        padding: 10px 40px;
+        border: none;
+        border-radius: 30px;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease, transform 0.2s;
+      }
+  
+      .predict-button:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+      }
+  
+      .main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 50px;
+        background: linear-gradient(to right, #ffffff, #e3f2fd);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+  
+      .symptoms-section {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 800px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+  
+      .symptoms-header {
+        text-align: center;
+      }
+  
+      .symptoms-header h2 {
+        font-size: 2rem;
+        color: #333333;
+        margin-bottom: 15px;
+      }
+  
+      .symptoms-header p {
+        font-size: 1.2rem;
+        color: #6c757d;
+        margin-bottom: 20px;
+      }
+  
+      .checkbox-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid #e2e8f0;
+        padding: 15px;
+      }
+  
+      .checkbox-container label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #edf2f7;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+      }
+  
+      .checkbox-container label:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        background: #e2e8f0;
+      }
+  
+      .checkbox-container input[type="checkbox"] {
+        display: none;
+      }
+  
+      .checkbox-container input[type="checkbox"]:checked + span {
+        background: #007bff;
+        color: #ffffff;
+        border-radius: 10px;
+      }
+  
+      .checkbox-container span {
+        padding: 10px;
+        display: block;
+        width: 100%;
+      }
+  
+      .btn-check {
+        background: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+  
+      .btn-check:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+      }
+  
+      /* Popup styles */
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        text-align: center;
+        z-index: 1000;
+      }
+  
+      .popup h3 {
+        margin: 0 0 15px;
+        font-size: 1.5rem;
+        color: #333333;
+      }
+  
+      .popup button {
+        background: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+  
+      .popup button:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+      }
+  
+      .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+    </style>
+    <script>
+      function validateSymptoms() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        const selectedCount = checkboxes.length;
+  
+        const popup = document.querySelector(".popup");
+        const overlay = document.querySelector(".popup-overlay");
+        const message = document.querySelector(".popup h3");
+  
+        if (selectedCount < 3) {
+          message.textContent = "Please choose at least 3 symptoms you are experiencing.";
+          popup.style.display = "block";
+          overlay.style.display = "block";
+          return false;
+        }
+  
+        if (selectedCount > 17) {
+          message.textContent = "Too many symptoms are entered. Please choose a maximum of 17 symptoms you are experiencing.";
+          popup.style.display = "block";
+          overlay.style.display = "block";
+          return false;
+        }
+  
+        return true;
+      }
+  
+      function closePopup() {
+        const popup = document.querySelector(".popup");
+        const overlay = document.querySelector(".popup-overlay");
+        popup.style.display = "none";
+        overlay.style.display = "none";
+      }
+    </script>
+</head>
+  
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <h1>S.I.G.N</h1>
+      <span>Symptoms Identification and General Navigation</span>
+    </div>
+    <nav>
+        <a href="{{ url_for('landing') }}">Home</a>
+        <a href="{{ url_for('check') }}">Predict</a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- Symptoms Section -->
+    <div class="symptoms-section">
+        <form method="POST" action="{{ url_for('check') }}" onsubmit="return validateSymptoms()">
+      <div class="symptoms-header">
+        <h2>Can you tell us about your symptoms today?</h2>
+        <p>Select the symptoms you're experiencing:</p>
+      </div>
+      <form>
+        <div class="checkbox-container">
+          {% for symptom in symptoms %}
+            <label>
+              <input type="checkbox" name="symptoms" value="{{ symptom }}">
+              <span>{{ symptom }}</span>
+            </label>
+          {% endfor %}
+        </div>
+        <button type="submit" class="btn-check">Check</button>
+    </form>
+</div>
+</div>
+
+<!-- Popup -->
+<div class="popup-overlay" onclick="closePopup()"></div>
+<div class="popup">
+<h3></h3>
+<button onclick="closePopup()">OK</button>
+</div>
+</body>
+</html>

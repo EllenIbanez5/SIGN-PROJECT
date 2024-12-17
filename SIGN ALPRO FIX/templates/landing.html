@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S.I.G.N - Landing Page</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #e3f2fd, #f8f9fa);
+      color: #333;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    .logo span {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333333;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    .predict-button {
+      background: #007bff;
+      color: #ffffff;
+      padding: 10px 40px;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .predict-button:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 50px;
+      background: linear-gradient(to right, #ffffff, #e3f2fd);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-content {
+      max-width: 50%;
+    }
+
+    .main h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #333333;
+      font-weight: bold;
+    }
+
+    .main p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #6c757d;
+    }
+
+    .main-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .main-image {
+      max-width: 40%;
+    }
+
+    .main-image img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Web Description Section */
+    .web-description-blocks {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 50px 30px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin: 50px auto;
+      max-width: 1200px;
+      border-radius: 15px;
+    }
+
+    .web-description-card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 30%;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Hover effect for Web Description Card */
+    .web-description-card:hover {
+      transform: translateY(-10px); /* Moves the card slightly upwards */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Increases shadow for hover effect */
+      background-color: #007bff; /* Background color changes to blue */
+      color: white; /* Text color changes to white */
+    }
+
+    /* Ensure text color inside the card changes to white on hover */
+    .web-description-card:hover h2,
+    .web-description-card:hover p {
+      color: white; /* Changes text color to white on hover */
+    }
+
+    .web-description-card h2 {
+      font-size: 1.5rem;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    .web-description-card p {
+      font-size: 1.1rem;
+      color: #6c757d;
+    }
+
+    /* About Us Section */
+    .about-section {
+      padding: 50px 30px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin: 50px auto;
+      max-width: 1200px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .about-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    .about-section p {
+      font-size: 1.2rem;
+      color: #6c757d;
+      margin-bottom: 30px;
+    }
+
+    /* Team Section */
+    .team-section {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .team-card {
+      background: #f9f9f9;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 25%;
+    }
+
+    .team-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .team-card h3 {
+      font-size: 1.2rem;
+      color: #333333;
+      margin-bottom: 5px;
+    }
+
+    .team-card p {
+      font-size: 1rem;
+      color: #6c757d;
+    }
+
+    /* Leave a Message Section */
+    .leave-message {
+      padding: 50px 30px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin: 50px auto;
+      max-width: 800px;
+      border-radius: 15px;
+    }
+
+    .leave-message-content h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #333333;
+      text-align: center;
+    }
+
+    .leave-message-content .decorative-line {
+      width: 80px;
+      height: 4px;
+      background: #007bff;
+      margin: 10px auto;
+      border-radius: 5px;
+    }
+
+    .leave-message form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .leave-message input,
+    .leave-message textarea {
+      width: calc(100% - 30px); /* Ensures input fields fit within the white block */
+      padding: 15px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f9f9f9;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      margin-left: 15px; /* Align inputs with the padding of the container */
+    }
+
+    .leave-message textarea {
+      resize: none;
+    }
+
+    .send-button {
+      background: linear-gradient(to right, #007bff, #0056b3);
+      color: #ffffff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      font-size: 1rem;
+    }
+
+    .send-button:hover {
+      background: linear-gradient(to right, #0056b3, #003d80);
+      transform: scale(1.05);
+    }
+
+    /* Contact Address Section */
+    .contact-address {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      padding: 50px 30px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin: 50px auto;
+      border-radius: 15px;
+      max-width: 1200px;
+    }
+
+    .contact-card {
+      text-align: center;
+      width: 22%;
+    }
+
+    .contact-card img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 20px;
+    }
+
+    .contact-card h3 {
+      font-size: 1.2rem;
+      color: #333333;
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      font-size: 1rem;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .contact-address {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-card {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .web-description-blocks {
+        flex-direction: column;
+      }
+
+      .web-description-card {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <h1>S.I.G.N</h1>
+      <span>Symptoms Identification and General Navigation</span>
+    </div>
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#leave-message">Leave a Message</a>
+        <a href="#contact-address">Contact & Address</a>
+        <a href="{{ url_for('check')}}">Predict</a>
+    </nav>
+  </div>
+
+  <section class="main">
+    <div class="main-content">
+      <h1>Learn more about your symptoms today!</h1>
+      <p>Spotting symptoms early empowers you to make smarter choices about what to do next—whether it's reaching out to a healthcare expert or taking proactive steps to boost your well-being.</p>
+      <div class="main-buttons">
+        <a href="{{ url_for('check')}}" class="predict-button">Predict</a>
+      </div>
+    </div>
+    <div class="main-image">
+      <img src="{{ url_for('static', filename='images/utama.png') }}" alt="Hospital Image">
+    </div>
+    
+  </section>
+
+  <!-- Web Description Section -->
+  <section class="web-description-blocks">
+    <div class="web-description-card">
+      <h2>Enter your symptoms.</h2>
+      <p>Quickly share what you're feeling to get started on understanding your health.</p>
+    </div>
+    <div class="web-description-card">
+      <h2>Discover the condition behind them.</h2>
+      <p>Get a clearer picture of what might be causing your symptoms and how to tackle them.</p>
+    </div>
+    <div class="web-description-card">
+      <h2>Take the first step towards relief.</h2>
+      <p>Act on the information you've gathered and begin taking control of your well-being.</p>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <h1>About Us</h1>
+    <p>
+      Welcome to S.I.G.N! Our mission is to empower individuals by providing a reliable, accessible, and innovative platform for disease prediction.
+      We combine technology with medical insights to help users better understand their health and make informed decisions.
+    </p>
+    <div class="team-section">
+      <div class="team-card">
+        <img src="{{ url_for('static', filename='images/sean.jpg') }}" alt="Team Member">
+        <h3>Sean Adam</h3>
+        <p>162112133161</p>
+      </div>
+      <div class="team-card">
+        <img src="{{ url_for('static', filename='images/ellenn.jpg') }}" alt="Team Member">
+        <h3>Ellen Diva Ibanez</h3>
+        <p>164231014</p>
+      </div>
+      <div class="team-card">
+        <img src="{{ url_for('static', filename='images/loly.jpg') }}" alt="Team Member">
+        <h3>Athalia Andria Loly A</h3>
+        <p>164231110</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="leave-message" class="leave-message">
+    <div class="leave-message-content">
+      <h3>Leave a Message</h3>
+      <div class="decorative-line"></div>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit" class="send-button">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact-address" class="contact-address">
+    <div class="contact-card">
+      <img src="{{ url_for('static', filename='images/location.png') }}" alt="Hospital Image">
+      <h3>Our Address</h3>
+      <p>Jl. Dr. Ir. H. Soekarno, Mulyorejo, Kec. Mulyorejo, Surabaya, Jawa Timur 60115</p>
+    </div>
+    <div class="contact-card">
+      <img src="{{ url_for('static', filename='images/email.png') }}" alt="Email Image">
+      <h3>Email Address</h3>
+      <p>sign@predictnow.com</p>
+    </div>
+    <div class="contact-card">
+      <img src="{{ url_for('static', filename='images/telp.png') }}" alt="Telephone Image">
+      <h3>Let's Talk With Us</h3>
+      <p>Phone: +6281234567890</p>
+    </div>
+    <div class="contact-card">
+      <img src="{{ url_for('static', filename='images/staff.png') }}" alt="Hospital Image">
+      <h3>Not Feeling Better?</h3>
+      <p>
+          <a href="https://www.halodoc.com/" target="_blank" style="text-decoration: none; color: inherit;">
+              Consult an expert here.
+          </a>
+      </p>
+  </div>  
+  </section>
+</body>
+</html>
